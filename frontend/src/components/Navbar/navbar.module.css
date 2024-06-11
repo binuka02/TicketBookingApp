@@ -22,9 +22,9 @@ header {
 	padding: 0 2rem;
 	background-color: var(--mainColor);
 	color: var(--textColor);
-    position: sticky;
-  top: 0;
-  z-index: 1000;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
 }
 
 nav a {
@@ -37,28 +37,51 @@ nav a:hover {
 	color: var(--secondaryColor);
 }
 
-header .nav-btn {
+/* header .navbar-btn {
 	padding: 5px;
 	cursor: pointer;
-	background: transparent;
+	background-color: red;
 	border: none;
 	outline: none;
 	color: var(--textColor);
-	visibility: hidden;
-	opacity: 0;
 	font-size: 1.8rem;
-}
+} */
 
-header div,
-nav {
-	display: flex;
-	align-items: center;
+header .navOpenBtn {
+	visibility: hidden;
+	opacity: 1;
+	padding: 5px;
+cursor: pointer;
+background-color: transparent;
+border: none;
+outline: none;
+color: var(--textColor);
+font-size: 1.8rem;
 }
 
 @media only screen and (max-width: 1024px) {
-	header .nav-btn {
+	header .navOpenBtn {
 		visibility: visible;
 		opacity: 1;
+		padding: 5px;
+		cursor: pointer;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		color: var(--textColor);
+		font-size: 1.8rem;
+	}
+
+	header .navCloseBtn {
+		visibility: visible;
+		opacity: 1;
+		padding: 5px;
+		cursor: pointer;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		color: var(--textColor);
+		font-size: 1.8rem;
 	}
 
 	header nav {
@@ -80,7 +103,8 @@ nav {
 		transform: translateY(100vh);
 	}
 
-	nav .nav-close-btn {
+	nav .navCloseBtn {
+		display: block;
 		position: absolute;
 		top: 2rem;
 		right: 2rem;
