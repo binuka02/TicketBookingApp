@@ -12,11 +12,13 @@ body {
   justify-content: center;
   background: linear-gradient(
     to right,
-    rgb(162, 216, 162),
-    rgb(102, 194, 102)
+    rgb(112, 121, 112),
+    rgb(165, 143, 72)
   );
 }
 .tickets {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   width: 90%;
   max-width: 550px;
   height: fit-content;

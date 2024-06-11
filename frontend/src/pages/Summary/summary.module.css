@@ -2,31 +2,72 @@
   width: 100%;
   height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: center; /* Vertical centering */
   justify-content: center;
-  background: linear-gradient(to right, rgb(162, 216, 162), rgb(102, 194, 102));
+  background: linear-gradient(to right, rgb(101, 100, 104), rgb(226, 226, 231));
 }
 
 .summary {
+  width: 40%;
+  max-width: 800px; /* Limit maximum width */
+  margin: 20px;
   background: white;
-  padding: 20px;
+
+  padding: 40px 20px; /* Increased padding */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertical centering */
 }
 
-.detail {
-  margin-bottom: 10px;
+.summaryh1 {
+  margin-bottom: 20px; /* Spacing between h1 and .summary */
+  text-align: center; /* Center the h1 */
 }
 
-button {
+.summaryDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns */
+  grid-column-gap: 20px; /* Adjust the gap between columns */
+}
+
+.detailLabels {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailValues {
+  display: flex;
+  flex-direction: column;
+}
+
+.summaryStrong {
+  font-weight: bold;
+}
+
+.summaryConfirmButton {
   background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 15px 30px;
   cursor: pointer;
   border-radius: 4px;
+  margin-top: 20px;
 }
 
-button:hover {
+.summaryConfirmButton:hover {
   background-color: #45a049;
+}
+
+.centerButton {
+  grid-column: span 2;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .summary {
+    width: 90%;
+  }
 }

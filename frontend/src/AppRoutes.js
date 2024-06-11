@@ -11,7 +11,7 @@ export default function AppRoutes() {
     return (
       <Router>
         <Routes>
-          <Route path="/" element={<Login/>}/>
+          <Route path="/" element={<HomePage/>}/>
           <Route path="/theater" element={<Theater />} />
           <Route path="/summary" element={<Summary />} />
           <Route path="/login" element={<Login />} />
