@@ -18,7 +18,7 @@ function NowShowing() {
       <div className={classes.card__container}>
         <article className={classes.card__article}>
           <img src={KM} alt="image" className={classes.card__img} />
-          <div className={classes.card__data}>
+          <div className={classes.card__data} onClick={() => handleBookNow('Kathuru Mithuru')}>
             <span className={classes.card__description}>Sinhala</span>
             <h2 className={classes.card__title}>Kathuru Mithuru</h2>
             <a onClick={() => handleBookNow('Kathuru Mithuru')} className={classes.card__button}>Book Now</a>
@@ -27,7 +27,7 @@ function NowShowing() {
 
         <article className={classes.card__article}>
           <img src={KM} alt="image" className={classes.card__img} />
-          <div className={classes.card__data}>
+          <div className={classes.card__data} onClick={() => handleBookNow('Kathuru Mithuru')}>
             <span className={classes.card__description}>Sinhala</span>
             <h2 className={classes.card__title}>Kathuru Mithuru</h2>
             <a onClick={() => handleBookNow('Kathuru Mithuru')} className={classes.card__button}>Book Now</a>
@@ -36,7 +36,7 @@ function NowShowing() {
 
         <article className={classes.card__article}>
           <img src={KM} alt="image" className={classes.card__img} />
-          <div className={classes.card__data}>
+          <div className={classes.card__data} onClick={() => handleBookNow('Kathuru Mithuru')}>
             <span className={classes.card__description}>Sinhala</span>
             <h2 className={classes.card__title}>Kathuru Mithuru</h2>
             <a onClick={() => handleBookNow('Kathuru Mithuru')} className={classes.card__button}>Book Now</a>

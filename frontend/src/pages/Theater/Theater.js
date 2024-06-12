@@ -29,20 +29,34 @@ const Theater = () => {
   };
 
   const generateSeats = () => {
-    const rows = 6;
-    const cols = 10;
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const rows = 17;
+    const cols = 18;
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split(''); 
+    const seatsToRemove = ['A1', 'A18', 'B1', 'B18'];
     let seats = [];
 
     for (let row = 0; row < rows; row++) {
+      seats.push(
+        <div key={`label-${row}`} className={classes.rowLabel}>
+          {alphabet[row % alphabet.length]}
+        </div>
+      );
       for (let col = 0; col < cols; col++) {
-        let seatNumber = `${alphabet[col]}${row + 1}`;
-        seats.push(
-          <React.Fragment key={`seat-${seatNumber}`}>
-            <input type="checkbox" name="tickets" id={seatNumber} onChange={handleSeatChange} />
-            <label htmlFor={seatNumber} className={`${classes.seat}`}></label>
-          </React.Fragment>
-        );
+        let seatNumber = `${alphabet[row]}${col + 1}`;
+        if (!seatsToRemove.includes(seatNumber)) {
+          seats.push(
+            <React.Fragment key={`seat-${seatNumber}`}>
+              <input type="checkbox" name="tickets" id={seatNumber} onChange={handleSeatChange} />
+              <label htmlFor={seatNumber} className={classes.seat}>
+                <span className={classes.seatNumber}>{seatNumber}</span>
+              </label>
+            </React.Fragment>
+          );
+        } else {
+          seats.push(
+            <div key={`empty-${seatNumber}`} className={classes.emptySeat}></div>
+          );
+        }
       }
     }
     return seats;
@@ -79,64 +93,44 @@ const Theater = () => {
         <div className={classes.ticketSelector}>
           <div className={classes.head}>
             <div className={classes.title}>{movieName}</div>
+            <div className={classes.theatername}>National Museum of the Romanian Peasant</div>
           </div>
+          <div className={classes.head}></div>
           <div className={classes.seats}>
             <div className={classes.status}>
               <div className={classes.item}>Available</div>
               <div className={classes.item}>Booked</div>
               <div className={classes.item}>Selected</div>
             </div>
-            <div className={classes.allSeats}>
-              {generateSeats()}
-            </div>
+            <div className={classes.scrollContainer}>
+  <div className={classes.allSeats}>
+    {generateSeats()}
+  </div>
+</div>
+
           </div>
           <div className={classes.timings}>
             <div className={classes.dates}>
               <input type="radio" name="date" id="d1" value="11" onChange={handleDateChange} />
               <label htmlFor="d1" className={classes.datesItem}>
-                <div className={classes.day}>Sun</div>
-                <div className={classes.date}>11</div>
+                <div className={classes.day}>Sat</div>
+                <div className={classes.date}>29</div>
               </label>
               <input type="radio" name="date" id="d2" value="12" onChange={handleDateChange} />
               <label htmlFor="d2" className={classes.datesItem}>
-                <div className={classes.day}>Mon</div>
-                <div className={classes.date}>12</div>
+                <div className={classes.day}>Sun</div>
+                <div className={classes.date}>30</div>
               </label>
-              <input type="radio" name="date" id="d3" value="13" onChange={handleDateChange} />
-              <label htmlFor="d3" className={classes.datesItem}>
-                <div className={classes.day}>Tue</div>
-                <div className={classes.date}>13</div>
-              </label>
-              <input type="radio" name="date" id="d4" value="14" onChange={handleDateChange} />
-              <label htmlFor="d4" className={classes.datesItem}>
-                <div className={classes.day}>Wed</div>
-                <div className={classes.date}>14</div>
-              </label>
-              <input type="radio" name="date" id="d5" value="15" onChange={handleDateChange} />
-              <label htmlFor="d5" className={classes.datesItem}>
-                <div className={classes.day}>Thu</div>
-                <div className={classes.date}>15</div>
-              </label>
-              <input type="radio" name="date" id="d6" value="16" onChange={handleDateChange} />
-              <label htmlFor="d6" className={classes.datesItem}>
-                <div className={classes.day}>Fri</div>
-                <div className={classes.date}>16</div>
-              </label>
-              <input type="radio" name="date" id="d7" value="17" onChange={handleDateChange} />
-              <label htmlFor="d7" className={classes.datesItem}>
-                <div className={classes.day}>Sat</div>
-                <div className={classes.date}>17</div>
-              </label>
+              {/* Additional dates can be added here */}
             </div>
             <div className={classes.times}>
               <input type="radio" name="time" id="t1" value="11:00" onChange={handleTimeChange} />
-              <label htmlFor="t1" className={classes.time}>11:00</label>
+              <label htmlFor="t1" className={classes.time}>10:30</label>
               <input type="radio" name="time" id="t2" value="15:00" onChange={handleTimeChange} />
-              <label htmlFor="t2" className={classes.time}>15:00</label>
+              <label htmlFor="t2" className={classes.time}>13:00</label>
               <input type="radio" name="time" id="t3" value="18:00" onChange={handleTimeChange} />
-              <label htmlFor="t3" className={classes.time}>18:00</label>
-              <input type="radio" name="time" id="t4" value="21:00" onChange={handleTimeChange} />
-              <label htmlFor="t4" className={classes.time}>21:00</label>
+              <label htmlFor="t3" className={classes.time}>13:30</label>
+              {/* Additional times can be added here */}
             </div>
           </div>
         </div>
