@@ -6,6 +6,7 @@ import Confirmation from './pages/Summary/Summary';
 import Summary from './pages/Summary/Summary';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
+import PaymentForm from './pages/PaymentForm/PaymentForm';
 
 export default function AppRoutes() {
     return (
@@ -16,6 +17,7 @@ export default function AppRoutes() {
           <Route path="/summary" element={<Summary />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/payment" element={<PaymentForm />} />
 
         </Routes>
       </Router>
