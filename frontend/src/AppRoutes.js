@@ -6,7 +6,8 @@ import Confirmation from './pages/Summary/Summary';
 import Summary from './pages/Summary/Summary';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
-import PaymentForm from './pages/PaymentForm/PaymentForm';
+import Payment from './pages/Payment/Payment';
+import Completion from './pages/Completion/Completion';
 
 export default function AppRoutes() {
     return (
@@ -17,7 +18,8 @@ export default function AppRoutes() {
           <Route path="/summary" element={<Summary />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/payment" element={<PaymentForm />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/completion" element={<Completion />} />
 
         </Routes>
       </Router>

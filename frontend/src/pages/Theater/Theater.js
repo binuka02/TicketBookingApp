@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import classes from './theater.module.css';
+import TheaterBack from '../../assets/img/theaterback.png';
 
 const Theater = () => {
   const [ticketCount, setTicketCount] = useState(0);
@@ -14,7 +15,7 @@ const Theater = () => {
 
   const handleSeatChange = (event) => {
     const isChecked = event.target.checked;
-    const pricePerTicket = 200;
+    const pricePerTicket = 10;
     const seat = event.target.id;
 
     if (isChecked) {
@@ -88,26 +89,22 @@ const Theater = () => {
   };
 
   return (
-    <div className={classes.center}>
-      <div className={classes.tickets}>
+    <div className={classes.center} style={{ backgroundImage: `url(${TheaterBack})` }}>      
+    <div className={classes.tickets}>
         <div className={classes.ticketSelector}>
           <div className={classes.head}>
             <div className={classes.title}>{movieName}</div>
             <div className={classes.theatername}>National Museum of the Romanian Peasant</div>
           </div>
-          <div className={classes.head}></div>
           <div className={classes.seats}>
             <div className={classes.status}>
               <div className={classes.item}>Available</div>
               <div className={classes.item}>Booked</div>
               <div className={classes.item}>Selected</div>
             </div>
-            <div className={classes.scrollContainer}>
-  <div className={classes.allSeats}>
-    {generateSeats()}
-  </div>
-</div>
-
+            <div className={classes.allSeats}>
+              {generateSeats()}
+            </div>
           </div>
           <div className={classes.timings}>
             <div className={classes.dates}>
@@ -137,11 +134,13 @@ const Theater = () => {
         <div className={classes.price}>
           <div className={classes.total}>
             <span>
-              <span className={classes.count}>{ticketCount}</span> Tickets
+              <span className={classes.count}>{ticketCount}</span> Ticket/s
             </span>
-            <div className={classes.amount}>{totalAmount}</div>
+            <div className={classes.amount}>{totalAmount}
+            <span className={classes.count}></span> RON
+            </div>
           </div>
-          <button type="button" onClick={handleBook}>Book</button>
+          <button type="button" onClick={handleBook} className={classes.booktheater}>Book</button>
         </div>
       </div>
     </div>

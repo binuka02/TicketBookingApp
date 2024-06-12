@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
 }
-.center {
+/* .center {
   width: 100%;
   height: 100%;
   display: flex;
@@ -15,12 +15,22 @@ body {
     rgb(112, 121, 112),
     rgb(165, 143, 72)
   );
+} */
+
+.center {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
 }
 .tickets {
   margin-top: 2rem;
   margin-bottom: 2rem;
   width: 90%;
-  max-width: 750px;
+  max-width: 850px;
   height: fit-content;
   border: 0.4mm solid rgba(0, 0, 0, 0.08);
   border-radius: 3mm;
@@ -31,6 +41,7 @@ body {
   overflow: auto;
   background: white;
   box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow-x: auto;
 }
 .ticketSelector {
   background: rgb(243, 243, 243);
@@ -65,6 +76,7 @@ body {
   flex-direction: column;
   min-height: 150px;
   position: relative;
+  overflow-x: auto;
 }
 .status {
   width: 100%;
@@ -80,7 +92,7 @@ body {
   transform: translate(-50%, 0);
   width: 220px;
   height: 7px;
-  background: rgb(141, 198, 255);
+  background: #F2E8C6;
   border-radius: 0 0 3mm 3mm;
   border-top: 0.3mm solid rgb(180, 180, 180);
 }
@@ -105,16 +117,9 @@ body {
   outline: none;
 }
 .item:nth-child(3)::before {
-  background: rgb(28, 185, 120);
+  background: #b58f12;
   outline: none;
 }
-
-.scrollContainer {
-  overflow-x: auto;
-  width: 100%;
-  padding-bottom: 20px; /* Add some padding to ensure scroll bar visibility */
-}
-
 .allSeats {
   display: grid;
   grid-template-columns: 20px repeat(18, 1fr); /* Add an extra column for the labels */
@@ -147,7 +152,7 @@ body {
 }
 
 .allSeats input:checked + label {
-  background: rgb(28, 185, 120);
+  background: #b58f12;
   outline: none;
 }
 
@@ -159,7 +164,7 @@ body {
 
 
 .allSeats input:checked + label {
-  background: rgb(28, 185, 120);
+  background: #b58f12;
   outline: none;
 }
 
@@ -221,8 +226,8 @@ input {
   margin-bottom: 10px;
 }
 .timings input:checked + label {
-  background: rgb(28, 185, 120);
-  color: white;
+  background: #F2E8C6;
+  color: rgb(89, 87, 87);
 }
 .price {
   width: 100%;
@@ -254,6 +259,10 @@ input {
   outline: none;
   border: none;
   cursor: pointer;
+}
+
+.booktheater:hover{
+  background-color: rgb(104, 103, 103);
 }
 
 @media (max-width: 768px) {

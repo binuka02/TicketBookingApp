@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const stripePromise = loadStripe('pk_test_51PQRzzGbNYoqvhhb0a4DlAp6bsQXhwF1k6rhtvUAFGCgHXElVep8eMyOZvr84TwVs9hOHuJ5O3CBBchkjV2DWn2w00GWAMw1UT');
 

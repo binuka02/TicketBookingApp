@@ -1,4 +1,5 @@
 import React from 'react';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import classes from './footer.module.css';
 
 function Footer() {
@@ -10,16 +11,16 @@ function Footer() {
             <a href="#" className={classes.brand}>LOGO</a>
             <ul className={classes.mediaIcons}>
               <li>
-                <a href="#"><i className="fa-brands fa-youtube"></i></a>
+                <a href="#"><i className="fab fa-facebook"></i></a>
               </li>
               <li>
-                <a href="#"><i className="fa-brands fa-discord"></i></a>
+                <a href="#"><i className="fab fa-instagram"></i></a>
               </li>
               <li>
-                <a href="#"><i className="fa-brands fa-instagram"></i></a>
+                <a href="#"><i className="fab fa-linkedin"></i></a>
               </li>
               <li>
-                <a href="#"><i className="fa-brands fa-github"></i></a>
+                <a href="#"><i className="fab fa-twitter"></i></a>
               </li>
             </ul>
           </div>
@@ -28,7 +29,6 @@ function Footer() {
               <li><a href="#">FAQ</a></li>
               <li><a href="#">Privacy Policy</a></li>
               <li><a href="#">Term & Condition</a></li>
-             
             </ul>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem excepturi ipsam unde obcaecati iusto velit labore consequuntur officiis aut neque?</p>
           </div>
@@ -37,21 +37,21 @@ function Footer() {
             <form>
               {/*<div className={classes.inputWrap}>
                 <input type="email" placeholder="ex@gmail.com" />
-                <button type="submit"><i className="fa-solid fa-paper-plane"></i></button>
+                <button type="submit"><i className="fas fa-paper-plane"></i></button>
               </div>*/}
             </form>
             <ul className={classes.servicesIcons}>
               <li>
-                <a href="#"><i className="fa-brands fa-cc-paypal"></i></a>
+                <a href="#"><i className="fab fa-cc-paypal"></i></a>
               </li>
               <li>
-                <a href="#"><i className="fa-brands fa-cc-apple-pay"></i></a>
+                <a href="#"><i className="fab fa-apple-pay"></i></a>
               </li>
               <li>
-                <a href="#"><i className="fa-brands fa-google-pay"></i></a>
+                <a href="#"><i className="fab fa-google-pay"></i></a>
               </li>
               <li>
-                <a href="#"><i className="fa-brands fa-cc-amazon-pay"></i></a>
+                <a href="#"><i className="fab fa-amazon-pay"></i></a>
               </li>
             </ul>
           </div>
