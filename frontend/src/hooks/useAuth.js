@@ -1,25 +1,43 @@
-import React, { createContext, useState } from "react";
+import { useState, createContext, useContext } from 'react';
+import * as AuthService from "../services/AuthService";
+import { toast } from 'react-toastify';
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
-const AuthProvider = ({ children }) => {
-  const [authToken, setAuthToken] = useState(null);
+export const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(AuthService.getCurrentUser() || null);
 
-  const login = (token) => {
-    setAuthToken(token);
-    localStorage.setItem("authToken", token);
+  const login = async (email, password) => {
+    try {
+      const user = await AuthService.login(email, password);
+      setUser(user);
+      toast.success('Login Successful');
+    } catch (err) {
+      toast.error(err.response.data);
+    }
+  };
+
+  const signup = async data => {
+    try {
+      const user = await AuthService.signup(data);
+      setUser(user);
+      toast.success('Signup Successful');
+    } catch (err) {
+      toast.error(err.response.data);
+    }
   };
 
   const logout = () => {
-    setAuthToken(null);
-    localStorage.removeItem("authToken");
+    AuthService.logout();
+    setUser(null);
+    toast.success('Logout Successful');
   };
 
   return (
-    <AuthContext.Provider value={{ authToken, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, signup }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export { AuthContext, AuthProvider };
+export const useAuth = () => useContext(AuthContext);

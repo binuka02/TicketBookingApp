@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
     TextField,
     InputAdornment,
@@ -11,6 +11,10 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import classes from './signup.module.css';
+import { toast } from 'react-toastify';
+import AuthService from "../../services/AuthService";
+import { useAuth } from "../../hooks/useAuth";
+
 
 const isEmail = (email) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 
@@ -39,15 +43,12 @@ const Signup = () => {
     const [formValid, setFormValid] = useState();
     const [success, setSuccess] = useState();
 
-    const navigate = useNavigate();
-
     const handleChange = ({ target: { name, value } }) => {
         setData({ ...data, [name]: value });
     };
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event) => event.preventDefault();
-
     const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
     const handleMouseDownConfirmPassword = (event) => event.preventDefault();
 
@@ -91,17 +92,19 @@ const Signup = () => {
 
         setFormValid(null);
 
-        try {
-            const url = "http://localhost:8080/api/users";
-            const { data: res } = await axios.post(url, data);
-            navigate("/login");
-            setSuccess("Form Submitted Successfully");
-        } catch (error) {
-            if (error.response && error.response.status >= 400 && error.response.status <= 500) {
-                setFormValid(error.response.data.message);
-            }
-        }
+       
     };
+
+    const auth = useAuth();
+    const { user } = auth;
+    const navigate = useNavigate();
+    const [params] = useSearchParams();
+    const returnUrl = params.get('returnUrl');
+
+
+    const submit = async data => {
+        await auth.signup(data);
+      };
 
     return (
         <div className={classes.signup_container}>
@@ -115,7 +118,7 @@ const Signup = () => {
                     </Link>
                 </div>
                 <div className={classes.right}>
-                    <form className={classes.form_container} onSubmit={handleSubmit}>
+                    <form className={classes.form_container} onSubmit={(e) => handleSubmit(e, submit)}>
                         <h1>Create Account</h1><br/>
                         <TextField
                             className={classes.input}

@@ -3,28 +3,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import classes from './summary.module.css';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import CheckoutForm from '../CheckoutForm/CheckoutForm';
+//import CheckoutForm from '../CheckoutForm/CheckoutForm';
 import TheaterBack from '../../assets/img/theaterback.png';
+import PayButton from '../../components/PayButton';
 
-const stripePromise = loadStripe("pk_test_51PQRzzGbNYoqvhhb0a4DlAp6bsQXhwF1k6rhtvUAFGCgHXElVep8eMyOZvr84TwVs9hOHuJ5O3CBBchkjV2DWn2w00GWAMw1UT");
 
 const Summary = () => {
   const location = useLocation();
   const { selectedSeats, totalAmount, movieName, selectedDate, selectedTime } = location.state;
   const [clientSecret, setClientSecret] = useState('');
 
-  const makePayment = async () => {
-    const response = await fetch('http://localhost:8080/api/payment/create-payment-intent', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ amount: totalAmount * 100 }), 
-    });
-
-    const { clientSecret } = await response.json();
-    setClientSecret(clientSecret);
-  };
 
   return (
     <div className={classes.center} style={{ backgroundImage: `url(${TheaterBack})` }}>
@@ -58,15 +46,9 @@ const Summary = () => {
       </div>
 
         <div className={classes.centerButton}>
-          {/* <button className={classes.summaryConfirmButton} type="button" onClick={makePayment}>Confirm</button> */}
-          <button className={classes.summaryConfirmButton} type="button" >Confirm</button>
-
+          <PayButton/>
         </div>
-        {clientSecret && (
-          <Elements stripe={stripePromise}>
-            <CheckoutForm clientSecret={clientSecret} amount={totalAmount * 100} />
-          </Elements>
-        )}
+    
       </div>
     </div>
   );

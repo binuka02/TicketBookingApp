@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { TextField, InputAdornment, IconButton, Input, InputLabel } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { AuthContext } from "../../hooks/useAuth";
 import classes from './login.module.css';
-
+import { toast } from 'react-toastify';
+import { useAuth } from "../../hooks/useAuth";
 const isEmail = (email) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 
 const Login = () => {
@@ -18,9 +18,6 @@ const Login = () => {
   const [formValid, setFormValid] = useState(null);
   const [success, setSuccess] = useState(null);
   
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
   
@@ -54,24 +51,31 @@ const Login = () => {
       return;
     }
     setFormValid(null);
+  };
 
-    try {
-      const url = "http://localhost:8080/api/auth";
-      const { data } = await axios.post(url, { email: emailInput, password: passwordInput });
-      login(data.token);
-      setSuccess("Login Successful");
-      navigate("/");
-    } catch (error) {
-      setFormValid("Invalid Credentials");
-    }
+  const navigate = useNavigate();
+  const { user, login } = useAuth();
+  const [params] = useSearchParams();
+  const returnUrl = params.get('returnUrl');
+  
+  
+  useEffect(() => {
+    if (!user) return;
+
+    returnUrl ? navigate(returnUrl) : navigate('/');
+  }, [user]);
+
+  
+  const submit = async ({ email, password }) => {
+    await login(email, password);
   };
 
   return (
     <div className={classes.login_container}>
       <div className={classes.login_form_container}>
         <div className={classes.left}>
-          <form className={classes.form_container} onSubmit={handleSubmit}>
-            <h1>Login to Your Account</h1><br />
+        <form className={classes.form_container} onSubmit={(e) => handleSubmit(e, submit)}>
+        <h1>Login to Your Account</h1><br />
             <InputLabel error={emailError} className={classes.loginInputLabel}>Email Address</InputLabel><br />
             <TextField
               className={classes.input}

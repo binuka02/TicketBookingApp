@@ -6,26 +6,36 @@ import Confirmation from './pages/Summary/Summary';
 import Summary from './pages/Summary/Summary';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
-import Payment from './pages/Payment/Payment';
-import Completion from './pages/Completion/Completion';
-import { AuthProvider } from './hooks/useAuth';
+import AuthRoute from './services/AuthRoutes';
+import UnderConstruction from './pages/UnderConstruction/UnderConstruction';
 
 export default function AppRoutes() {
     return (
-      <AuthProvider>
         <Router>
           <Routes>
             <Route path="/" element={<HomePage/>}/>
-            <Route path="/theater" element={<Theater />} />
-            <Route path="/summary" element={<Summary />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/completion" element={<Completion />} />
+            <Route path="/underconstruction" element={<UnderConstruction />} />
+            
+            <Route 
+              path="/theater" 
+              element={
+                <AuthRoute>
+                  <Theater />
+                </AuthRoute>
+              } />
+
+            <Route 
+              path="/summary" 
+              element={
+                <AuthRoute>
+                  <Summary />
+                </AuthRoute>
+            } />
 
           </Routes>
         </Router>
-      </AuthProvider>
 
 );
 }
