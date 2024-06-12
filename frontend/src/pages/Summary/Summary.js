@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import classes from './summary.module.css';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import CheckoutForm from '../CheckoutForm/CheckoutForm';
+//import CheckoutForm from '../CheckoutForm/CheckoutForm';
 import TheaterBack from '../../assets/img/theaterback.png';
 
 const stripePromise = loadStripe("pk_test_51PQRzzGbNYoqvhhb0a4DlAp6bsQXhwF1k6rhtvUAFGCgHXElVep8eMyOZvr84TwVs9hOHuJ5O3CBBchkjV2DWn2w00GWAMw1UT");
@@ -62,11 +62,11 @@ const Summary = () => {
           <button className={classes.summaryConfirmButton} type="button" >Confirm</button>
 
         </div>
-        {clientSecret && (
+        {/* {clientSecret && (
           <Elements stripe={stripePromise}>
             <CheckoutForm clientSecret={clientSecret} amount={totalAmount * 100} />
           </Elements>
-        )}
+        )} */}
       </div>
     </div>
   );
