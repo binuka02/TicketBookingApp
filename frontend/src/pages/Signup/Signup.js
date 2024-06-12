@@ -4,20 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 import {
     TextField,
     InputAdornment,
-    FormControl,
-    InputLabel,
     IconButton,
-    Button,
     Input,
-    Alert,
-    Stack,
+    InputLabel
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import classes from './signup.module.css';
 
-const isEmail = (email) =>
-    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+const isEmail = (email) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -51,14 +46,10 @@ const Signup = () => {
     };
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+    const handleMouseDownPassword = (event) => event.preventDefault();
 
     const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
-    const handleMouseDownConfirmPassword = (event) => {
-        event.preventDefault();
-    };
+    const handleMouseDownConfirmPassword = (event) => event.preventDefault();
 
     const handleEmailValidation = () => {
         if (!isEmail(data.email)) {
@@ -88,7 +79,6 @@ const Signup = () => {
         e.preventDefault();
         setSuccess(null);
 
-        // Validate form
         if (!data.firstName || !data.lastName || !data.email || !data.phone || !data.password || !data.confirmPassword) {
             setFormValid("All fields are required.");
             return;
@@ -105,7 +95,6 @@ const Signup = () => {
             const url = "http://localhost:8080/api/users";
             const { data: res } = await axios.post(url, data);
             navigate("/login");
-            console.log(res.message);
             setSuccess("Form Submitted Successfully");
         } catch (error) {
             if (error.response && error.response.status >= 400 && error.response.status <= 500) {
@@ -134,7 +123,6 @@ const Signup = () => {
                             fullWidth
                             id="firstName"
                             variant="standard"
-                            sx={{ width: "100%" }}
                             value={data.firstName}
                             name="firstName"
                             onChange={handleChange}
@@ -146,7 +134,6 @@ const Signup = () => {
                             fullWidth
                             id="lastName"
                             variant="standard"
-                            sx={{ width: "100%" }}
                             value={data.lastName}
                             name="lastName"
                             onChange={handleChange}
@@ -159,7 +146,6 @@ const Signup = () => {
                             error={errors.emailError}
                             id="email"
                             variant="standard"
-                            sx={{ width: "100%" }}
                             value={data.email}
                             name="email"
                             onBlur={handleEmailValidation}
@@ -172,7 +158,6 @@ const Signup = () => {
                             fullWidth
                             id="phone"
                             variant="standard"
-                            sx={{ width: "100%" }}
                             value={data.phone}
                             name="phone"
                             onChange={handleChange}

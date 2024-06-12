@@ -7,10 +7,10 @@ import HomePage from './pages/Home/HomePage';
 function App(){
   return (
     <>
-      {/* <Navbar/>
+      <Navbar/>
       <AppRoutes/>
-      <Footer/> */}
-      <SideNavbar/>
+      <Footer/>
+      {/* <SideNavbar/> */}
     </>
   );
 }

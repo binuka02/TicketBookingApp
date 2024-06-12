@@ -37,7 +37,7 @@
 }
 
 .right {
-    background-color: #3bb19b;
+    background-color: #b58f12;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -83,7 +83,7 @@
 }
 
 .success_msg {
-    background-color: #4caf50;
+    background-color: #b58f12;
     color: white;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .green_btn {
-    background-color: #3bb19b;
+    background-color: #b58f12;
     color: white;
 }
 
@@ -131,13 +131,13 @@
     }
 
 	.green_btn {
-		background-color: #3bb19b;
+		background-color: #b58f12;
 		color: white;
 		transition: background-color 0.3s ease;
 	}
 	
 	.green_btn:hover {
-		background-color: #339982;
+		background-color: #b58f12;
 	}
 	
 	.white_btn {

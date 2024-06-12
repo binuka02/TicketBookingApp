@@ -8,21 +8,24 @@ import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import Payment from './pages/Payment/Payment';
 import Completion from './pages/Completion/Completion';
+import { AuthProvider } from './hooks/useAuth';
 
 export default function AppRoutes() {
     return (
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage/>}/>
-          <Route path="/theater" element={<Theater />} />
-          <Route path="/summary" element={<Summary />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/completion" element={<Completion />} />
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomePage/>}/>
+            <Route path="/theater" element={<Theater />} />
+            <Route path="/summary" element={<Summary />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/completion" element={<Completion />} />
 
-        </Routes>
-      </Router>
+          </Routes>
+        </Router>
+      </AuthProvider>
 
 );
 }
