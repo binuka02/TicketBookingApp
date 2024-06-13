@@ -1,0 +1,23 @@
+.paymentSuccess {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .bookingDetails {
+    margin-top: 20px;
+    text-align: left;
+    display: inline-block;
+  }
+  
+  .bookingDetails h2 {
+    margin-bottom: 10px;
+  }
+  
+  .bookingDetails p {
+    margin: 5px 0;
+  }
+  
+  .bookingDetails strong {
+    margin-right: 10px;
+  }
+  
