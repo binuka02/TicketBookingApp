@@ -5,76 +5,81 @@ import { useAuth } from "../../hooks/useAuth";
 import { Link } from 'react-router-dom';
 
 function Navbar() {
-	const {user, logout} = useAuth();
+    const { user, logout } = useAuth();
 
-	const navRef = useRef();
-	const [isResponsive, setIsResponsive] = useState(false);
+    const navRef = useRef();
+    const [isResponsive, setIsResponsive] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-	const showNavbar = () => {
-		navRef.current.classList.toggle(classes.responsive_nav);
-		setIsResponsive(!isResponsive);
-	};
+    const showNavbar = () => {
+        navRef.current.classList.toggle(classes.responsive_nav);
+        setIsResponsive(!isResponsive);
+    };
 
-	const handleResize = () => {
-		if (window.innerWidth > 1024) {
-			setIsResponsive(false);
-			if (navRef.current) {
-				navRef.current.classList.remove(classes.responsive_nav);
-			}
-		}
-	};
+    const handleResize = () => {
+        if (window.innerWidth > 1024) {
+            setIsResponsive(false);
+            if (navRef.current) {
+                navRef.current.classList.remove(classes.responsive_nav);
+            }
+        }
+    };
 
-	useEffect(() => {
-		window.addEventListener('resize', handleResize);
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, []);
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
-	return (
-		<header>
-			<h3>LOGO</h3>
-			<nav ref={navRef}>
-				<a href="/underconstruction">Home</a>
-				<a href="/underconstruction">About Us</a>
-				<a href="/underconstruction">Gallery</a>
-				<a href="/underconstruction">Movies</a>
-				<a href="/underconstruction">Contact Us</a>
-				<a href="/login">Sign In</a>
-				{/* <div>
-				{
-                            user? (
-                            <li className={classes.menu_container}>
-                                <Link className={classes.menu}>
-                                    {user.name}
-                                </Link>
-                                <div className={classes.menu}>
-                                  <a onClick={logout}>Logout</a>
-                                </div>
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
 
-        
-                            </li> 
-                            ) : (
-                            <Link to="/login" className={classes.login}>Sign In</Link>
+    const handleLinkClick = () => {
+        if (isResponsive) {
+            showNavbar();
+        }
+    };
+
+    return (
+        <header>
+            <h3>LOGO</h3>
+            <nav ref={navRef}>
+                <Link to="/" onClick={handleLinkClick}>Home</Link>
+                <Link to="/underconstruction" onClick={handleLinkClick}>About Us</Link>
+                <Link to="/underconstruction" onClick={handleLinkClick}>Gallery</Link>
+                <Link to="/underconstruction" onClick={handleLinkClick}>Movies</Link>
+                <Link to="/underconstruction" onClick={handleLinkClick}>Contact Us</Link>
+
+                {user ? (
+                    <div className={classes.dropdown}>
+                        <button onClick={toggleDropdown} className={classes.userBtn}>
+                            {user.firstName}
+                        </button>
+                        {isDropdownOpen && (
+                            <div className={classes.dropdownContent}>
+                                <button onClick={logout}>Logout</button>
+                            </div>
                         )}
-				</div> */}
-				{isResponsive && (
-					<button
-						className={classes.navCloseBtn}
-						onClick={showNavbar}>
-						<FaTimes/>
-					</button>
-				)}
-			</nav>
-			{!isResponsive && (
-				<button
-					className={classes.navOpenBtn}
-					onClick={showNavbar}>
-					<FaBars />
-				</button>
-			)}
-		</header>
-	);
+                    </div>
+                ) : (
+                    <Link to="/login" onClick={handleLinkClick}>Sign In</Link>
+                )}
+
+                {isResponsive && (
+                    <button className={classes.navCloseBtn} onClick={showNavbar}>
+                        <FaTimes />
+                    </button>
+                )}
+            </nav>
+            {!isResponsive && (
+                <button className={classes.navOpenBtn} onClick={showNavbar}>
+                    <FaBars />
+                </button>
+            )}
+        </header>
+    );
 }
 
 export default Navbar;

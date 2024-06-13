@@ -1,320 +1,333 @@
-body {
-  width: 100%;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Titillium Web", sans-serif;
 }
-/* .center {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(
-    to right,
-    rgb(112, 121, 112),
-    rgb(165, 143, 72)
-  );
-} */
+
+:root {
+    --mainColor: #BB0029;
+    --mainColorLight: #5767aa;
+    --secondaryColor: #db2b39;
+    --textColor: #eee;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
 
 .center {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
 }
+
 .tickets {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  width: 90%;
-  max-width: 850px;
-  height: fit-content;
-  border: 0.4mm solid rgba(0, 0, 0, 0.08);
-  border-radius: 3mm;
-  box-sizing: border-box;
-  padding: 10px;
-  font-family: poppins;
-  /* max-height: 120vh; */
-  overflow: auto;
-  background: white;
-  box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
-  overflow-x: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 90%;
+    max-width: 850px;
+    height: fit-content;
+    border: 0.4mm solid rgba(0, 0, 0, 0.08);
+    border-radius: 3mm;
+    box-sizing: border-box;
+    padding: 10px;
+    font-family: Poppins, sans-serif;
+    background: white;
+    box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
+
 .ticketSelector {
-  background: rgb(243, 243, 243);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  box-sizing: border-box;
-  padding: 20px;
+    background: rgb(243, 243, 243);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 20px;
 }
+
 .head {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
 }
+
 .title {
-  font-size: 20px;
-  font-weight: 600;
+    font-size: 20px;
+    font-weight: 600;
 }
+
 .theatername {
-  font-size: 16px;
-  font-weight: 500;
+    font-size: 16px;
+    font-weight: 500;
 }
+
 .seats {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-height: 150px;
-  position: relative;
-  overflow-x: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 150px;
+    position: relative;
 }
+
 .status {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
+
 .seats::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
-  width: 220px;
-  height: 7px;
-  background: #F2E8C6;
-  border-radius: 0 0 3mm 3mm;
-  border-top: 0.3mm solid rgb(180, 180, 180);
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 220px;
+    height: 7px;
+    background: #F2E8C6;
+    border-radius: 0 0 3mm 3mm;
+    border-top: 0.3mm solid rgb(180, 180, 180);
 }
+
 .item {
-  font-size: 12px;
-  position: relative;
+    font-size: 12px;
+    position: relative;
 }
+
 .item::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -12px;
-  transform: translate(0, -50%);
-  width: 10px;
-  height: 10px;
-  background: rgb(255, 255, 255);
-  outline: 0.2mm solid rgb(120, 120, 120);
-  border-radius: 0.3mm;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -12px;
+    transform: translate(0, -50%);
+    width: 10px;
+    height: 10px;
+    background: rgb(255, 255, 255);
+    outline: 0.2mm solid rgb(120, 120, 120);
+    border-radius: 0.3mm;
 }
+
 .item:nth-child(2)::before {
-  background: rgb(180, 180, 180);
-  outline: none;
+    background: rgb(180, 180, 180);
+    outline: none;
 }
+
 .item:nth-child(3)::before {
-  background: #b58f12;
-  outline: none;
+    background: #b58f12;
+    outline: none;
 }
+
+.allSeatsContainer {
+    width: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    margin: 20px 0;
+}
+
 .allSeats {
-  display: grid;
-  grid-template-columns: 20px repeat(18, 1fr); /* Add an extra column for the labels */
-  grid-gap: 5px;
-  margin: 60px 0;
-  margin-top: 20px;
-  position: relative;
-  width: 80%;
+    display: grid;
+    grid-template-columns: 20px repeat(18, 1fr); /* Keep the grid layout consistent */
+    grid-gap: 5px;
+    position: relative;
+    min-width: 600px; /* Minimum width to ensure horizontal scroll */
 }
 
 .rowLabel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
 }
 
-
 .seat {
-  width: 20px;
-  height: 20px;
-  background: white;
-  border-radius: 0.5mm;
-  outline: 0.3mm solid rgb(180, 180, 180);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 0.5mm;
+    outline: 0.3mm solid rgb(180, 180, 180);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .allSeats input:checked + label {
-  background: #b58f12;
-  outline: none;
+    background: #b58f12;
+    outline: none;
 }
 
 .seatNumber {
-  font-size: 8px;
-  color: black;
-  position: absolute;
-}
-
-
-.allSeats input:checked + label {
-  background: #b58f12;
-  outline: none;
+    font-size: 8px;
+    color: black;
+    position: absolute;
 }
 
 .seat.booked {
-  background: rgb(180, 180, 180);
-  outline: none;
+    background: rgb(180, 180, 180);
+    outline: none;
 }
 
 input {
-  display: none;
-}
-.timings {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-}
-.dates {
-  width: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-.datesItem {
-  width: 50px;
-  height: 40px;
-  background: rgb(233, 233, 233);
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 10px 0;
-  border-radius: 2mm;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-.day {
-  font-size: 12px;
-}
-.times {
-  width: 30%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-  flex-wrap: wrap;
-}
-.time {
-  font-size: 14px;
-  width: fit-content;
-  padding: 7px 14px;
-  background: rgb(233, 233, 233);
-  border-radius: 2mm;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-.timings input:checked + label {
-  background: #F2E8C6;
-  color: rgb(89, 87, 87);
-}
-.price {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.total {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 500;
-}
-.total span {
-  font-size: 11px;
-  font-weight: 400;
-}
-.price button {
-  background: rgb(60, 60, 60);
-  color: white;
-  font-family: poppins;
-  font-size: 14px;
-  padding: 7px 14px;
-  border-radius: 2mm;
-  outline: none;
-  border: none;
-  cursor: pointer;
+    display: none;
 }
 
-.booktheater:hover{
-  background-color: rgb(104, 103, 103);
+.timings {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.dates {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.datesItem {
+    width: 50px;
+    height: 40px;
+    background: rgb(233, 233, 233);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px 0;
+    border-radius: 2mm;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.day {
+    font-size: 12px;
+}
+
+.times {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.time {
+    font-size: 14px;
+    width: fit-content;
+    padding: 7px 14px;
+    background: rgb(233, 233, 233);
+    border-radius: 2mm;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timings input:checked + label {
+    background: #F2E8C6;
+    color: rgb(89, 87, 87);
+}
+
+.price {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.total {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.total span {
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.price button {
+    background: rgb(60, 60, 60);
+    color: white;
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    padding: 7px 14px;
+    border-radius: 2mm;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.booktheater:hover {
+    background-color: rgb(104, 103, 103);
 }
 
 @media (max-width: 768px) {
-  .tickets {
-    width: 100%;
-    padding: 10px;
-  }
+    .tickets {
+        width: 100%;
+        padding: 10px;
+    }
 
-  .allSeats {
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 10px;
-    margin: 20px 0;
-  }
+    .dates {
+        flex-direction: column;
+        align-items: center;
+    }
 
-  .dates {
-    flex-direction: column;
-    align-items: center;
-  }
+    .datesItem {
+        width: 80%;
+        margin-bottom: 10px;
+    }
 
-  .datesItem {
-    width: 80%;
-    margin-bottom: 10px;
-  }
+    .times {
+        flex-direction: column;
+        align-items: center;
+    }
 
-  .times {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .time {
-    width: 80%;
-    margin-bottom: 10px;
-  }
+    .time {
+        width: 80%;
+        margin-bottom: 10px;
+    }
 }
 
 @media (max-width: 480px) {
-  .tickets {
-    width: 100%;
-    padding: 5px;
-  }
+    .tickets {
+        width: 100%;
+        padding: 5px;
+    }
 
-  .allSeats {
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 5px;
-    margin: 20px 0;
-  }
+    .datesItem {
+        width: 100%;
+    }
 
-  .datesItem {
-    width: 100%;
-  }
-
-  .time {
-    width: 100%;
-  }
+    .time {
+        width: 100%;
+    }
 }

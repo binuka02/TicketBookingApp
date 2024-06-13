@@ -11,7 +11,6 @@ import UnderConstruction from './pages/UnderConstruction/UnderConstruction';
 
 export default function AppRoutes() {
     return (
-        <Router>
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/login" element={<Login />} />
@@ -21,10 +20,16 @@ export default function AppRoutes() {
             <Route 
               path="/theater" 
               element={
-                <AuthRoute>
                   <Theater />
-                </AuthRoute>
               } />
+
+            {/* <Route 
+              path="/summary" 
+              element={
+                <AuthRoute>
+                  <Summary />
+                </AuthRoute>
+            } /> */}
 
             <Route 
               path="/summary" 
@@ -35,7 +40,6 @@ export default function AppRoutes() {
             } />
 
           </Routes>
-        </Router>
 
 );
 }

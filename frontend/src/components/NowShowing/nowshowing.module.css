@@ -5,7 +5,7 @@
 :root {
   /*========== Colors ==========*/
   /*Color mode HSL(hue, saturation, lightness)*/
-  --first-color: hsl(82, 60%, 28%);
+  --first-color: #b58f12;
   --title-color: hsl(0, 0%, 15%);
   --text-color: hsl(0, 0%, 35%);
   --body-color: hsl(0, 0%, 95%);
@@ -110,7 +110,8 @@ img {
 }
 
 .card__button:hover {
-  text-decoration: underline;
+  /* color:rgb(137, 136, 135); */
+  font-weight: bold;
 }
 
 /* Naming animations in hover */

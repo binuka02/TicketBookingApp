@@ -89,8 +89,8 @@ const Theater = () => {
   };
 
   return (
-    <div className={classes.center} style={{ backgroundImage: `url(${TheaterBack})` }}>      
-    <div className={classes.tickets}>
+    <div className={classes.center} style={{ backgroundImage: `url(${TheaterBack})` }}>
+      <div className={classes.tickets}>
         <div className={classes.ticketSelector}>
           <div className={classes.head}>
             <div className={classes.title}>{movieName}</div>
@@ -102,8 +102,10 @@ const Theater = () => {
               <div className={classes.item}>Booked</div>
               <div className={classes.item}>Selected</div>
             </div>
-            <div className={classes.allSeats}>
-              {generateSeats()}
+            <div className={classes.allSeatsContainer}>
+              <div className={classes.allSeats}>
+                {generateSeats()}
+              </div>
             </div>
           </div>
           <div className={classes.timings}>
@@ -136,9 +138,7 @@ const Theater = () => {
             <span>
               <span className={classes.count}>{ticketCount}</span> Ticket/s
             </span>
-            <div className={classes.amount}>{totalAmount}
-            <span className={classes.count}></span> RON
-            </div>
+            <div className={classes.amount}>{totalAmount} RON</div>
           </div>
           <button type="button" onClick={handleBook} className={classes.booktheater}>Book</button>
         </div>
