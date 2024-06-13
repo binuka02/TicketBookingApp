@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "/auth";
+const API_URL = "http://localhost:8081/api/v1/auth";
 
 export const signup = (data) => {
     return axios
