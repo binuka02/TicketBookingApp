@@ -7,6 +7,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import classes from './login.module.css';
 import { toast } from 'react-toastify';
 import { useAuth } from "../../hooks/useAuth";
+
 const isEmail = (email) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 
 const Login = () => {
@@ -37,9 +38,23 @@ const Login = () => {
     setPasswordError(false);
   };
 
+  const navigate = useNavigate();
+  const { user, login } = useAuth();
+  const [params] = useSearchParams();
+  const returnUrl = params.get('returnUrl');
+  
+  useEffect(() => {
+    if (!user) return;
+
+    returnUrl ? navigate(returnUrl) : navigate('/');
+  }, [user, navigate, returnUrl]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccess(null);
+
+    handleEmail();
+    handlePassword();
 
     if (emailError || !emailInput) {
       setFormValid("Email is Invalid. Please Re-Enter");
@@ -50,32 +65,23 @@ const Login = () => {
       setFormValid("Password must be between 5 - 20 characters long. Please Re-Enter");
       return;
     }
+    
     setFormValid(null);
-  };
 
-  const navigate = useNavigate();
-  const { user, login } = useAuth();
-  const [params] = useSearchParams();
-  const returnUrl = params.get('returnUrl');
-  
-  
-  useEffect(() => {
-    if (!user) return;
-
-    returnUrl ? navigate(returnUrl) : navigate('/');
-  }, [user]);
-
-  
-  const submit = async ({ email, password }) => {
-    await login(email, password);
+    try {
+      await login(emailInput, passwordInput);
+      setSuccess("Login successful!");
+    } catch (error) {
+      setFormValid("Login failed. Please check your credentials.");
+    }
   };
 
   return (
     <div className={classes.login_container}>
       <div className={classes.login_form_container}>
         <div className={classes.left}>
-        <form className={classes.form_container} onSubmit={(e) => handleSubmit(e, submit)}>
-        <h1>Login to Your Account</h1><br />
+          <form className={classes.form_container} onSubmit={handleSubmit}>
+            <h1>Login to Your Account</h1><br />
             <InputLabel error={emailError} className={classes.loginInputLabel}>Email Address</InputLabel><br />
             <TextField
               className={classes.input}
