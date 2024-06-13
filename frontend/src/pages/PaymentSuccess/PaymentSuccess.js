@@ -7,13 +7,19 @@ const PaymentSuccess = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const userId = localStorage.getItem('id'); // Retrieve userId from localStorage
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const userId = userData ? userData.id : null;
 
     const fetchBookingDetails = async () => {
       try {
         const response = await axios.get(`http://localhost:8081/api/v1/booking/${userId}/booking-details`);
-        setBookingDetails(response.data);
-        setLoading(false);
+        if (response.data) {
+          setBookingDetails(response.data);
+          setLoading(false);
+        } else {
+          setError('No booking details found for this user');
+          setLoading(false);
+        }
       } catch (err) {
         setError('Failed to fetch booking details');
         setLoading(false);
@@ -36,11 +42,16 @@ const PaymentSuccess = () => {
     return <div>{error}</div>;
   }
 
+  if (!bookingDetails) {
+    return <div>No booking details available.</div>;
+  }
+
   return (
     <div>
       <h1>Payment Successful!</h1>
       <div>
         <h2>Booking Details</h2>
+        <p><strong>Reference Number/s:</strong> {bookingDetails.id}</p>
         <p><strong>Event Name:</strong> {bookingDetails.eventName}</p>
         <p><strong>Total Amount:</strong> {bookingDetails.totalAmount} RON</p>
         <p><strong>Date:</strong> {bookingDetails.date}</p>
@@ -48,6 +59,7 @@ const PaymentSuccess = () => {
         <p><strong>Seat Count:</strong> {bookingDetails.seatCount}</p>
         <p><strong>Event Type:</strong> {bookingDetails.eventType}</p>
         <p><strong>Status:</strong> {bookingDetails.status}</p>
+        <p><strong>Seat Number:</strong> {bookingDetails.seatNumber}</p>
       </div>
     </div>
   );
