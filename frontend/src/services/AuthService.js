@@ -53,9 +53,10 @@
 
 // services/AuthService.js
 
-import axios from 'axios';
+import axios from '../Interceptors/axiosInstance';
 
 const API_URL = "http://localhost:8081/api/v1/auth";
+const TOKEN_KEY = 'access_token';
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -68,10 +69,16 @@ export const signup = async (firstName, lastName, email, contact, cnp, password)
   return response.data.user;
 };
 
+
 export const login = async (email, password) => {
-  const response = await axiosInstance.post('/login', { email, password });
-  localStorage.setItem('user', JSON.stringify(response.data.user));
-  return response.data.user;
+  try {
+    const response = await axios.post('/login', { email, password });
+    const { token } = response.data;
+    localStorage.setItem('access_token', token);
+    return response.data.user; // Assuming you return the user object from your backend
+  } catch (err) {
+    throw err; // Handle error appropriately in your Login component
+  }
 };
 
 export const logout = () => {
@@ -79,9 +86,16 @@ export const logout = () => {
 };
 
 export const getCurrentUser = () => {
-  const user = localStorage.getItem('user');
-  if (user) {
-    return JSON.parse(user);
+  const userString = localStorage.getItem('user');
+  if (!userString) {
+    return null; // or handle this case based on your application logic
   }
-  return null; // Or whatever default value you want to return
+  
+  try {
+    const user = JSON.parse(userString);
+    return user;
+  } catch (error) {
+    console.error('Error parsing user from local storage:', error);
+    return null; // or handle this case based on your application logic
+  }
 };

@@ -12,7 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from './hooks/useAuth';
 import 'react-toastify/dist/ReactToastify.css';
 import BookingProvider from './hooks/useBooking';
-import './Interceptors/authInterceptors';
+import './Interceptors/axiosInstance';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
