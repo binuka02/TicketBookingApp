@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
     TextField,
     InputAdornment,
     IconButton,
-    Input,
-    InputLabel
+    Input
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -92,7 +90,12 @@ const Signup = () => {
 
         setFormValid(null);
 
-       
+        try {
+            await submit(data);
+            toast.success("Signup successful!");
+        } catch (error) {
+            toast.error("Signup failed. Please try again.");
+        }
     };
 
     const auth = useAuth();
@@ -106,10 +109,9 @@ const Signup = () => {
       returnUrl ? navigate(returnUrl) : navigate('/');
     }, [user]);
 
-
-    const submit = async data => {
+    const submit = async (data) => {
         await auth.signup(data);
-      };
+    };
 
     return (
         <div className={classes.signup_container}>
@@ -123,7 +125,7 @@ const Signup = () => {
                     </Link>
                 </div>
                 <div className={classes.right}>
-                    <form className={classes.form_container} onSubmit={(e) => handleSubmit(e, submit)}>
+                    <form className={classes.form_container} onSubmit={handleSubmit}>
                         <h1>Create Account</h1><br/>
                         <TextField
                             className={classes.input}

@@ -20,16 +20,10 @@ export default function AppRoutes() {
             <Route 
               path="/theater" 
               element={
-                  <Theater />
-              } />
-
-            {/* <Route 
-              path="/summary" 
-              element={
                 <AuthRoute>
-                  <Summary />
-                </AuthRoute>
-            } /> */}
+                  <Theater/>
+              </AuthRoute>
+              } />
 
             <Route 
               path="/summary" 
@@ -38,6 +32,7 @@ export default function AppRoutes() {
                   <Summary />
                 </AuthRoute>
             } />
+
 
           </Routes>
 
