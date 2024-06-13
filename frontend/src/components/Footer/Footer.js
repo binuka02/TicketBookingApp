@@ -30,7 +30,7 @@ function Footer() {
               <li><a href="#">Privacy Policy</a></li>
               <li><a href="#">Term & Condition</a></li>
             </ul>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem excepturi ipsam unde obcaecati iusto velit labore consequuntur officiis aut neque?</p>
+            <p>Our user-friendly BUY TICKET support hub is continually booming with the latest events, allowing you to confidently plan your next event! It's also a useful resource for answering queries from ticket buyers. Trust us to give the unwavering assistance required for a successful event!</p>
           </div>
           <div className={classes.col3}>
             <p>Services</p>

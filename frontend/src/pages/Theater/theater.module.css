@@ -101,7 +101,7 @@ body {
     transform: translate(-50%, 0);
     width: 220px;
     height: 7px;
-    background: #F2E8C6;
+    background: #e1c14f;
     border-radius: 0 0 3mm 3mm;
     border-top: 0.3mm solid rgb(180, 180, 180);
 }
@@ -183,6 +183,10 @@ body {
 .seat.booked {
     background: rgb(180, 180, 180);
     outline: none;
+}
+
+.bookedSeat {
+  background: rgb(180, 180, 180);
 }
 
 input {
@@ -291,6 +295,29 @@ input {
 .booktheater:hover {
     background-color: rgb(104, 103, 103);
 }
+
+
+
+.times {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Adjust gap as needed */
+  margin-top: 20px; /* Add margin for spacing */
+}
+
+/* .datesItem, .time {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f0e68c;
+  cursor: pointer;
+  text-align: center;
+} */
+
+.datesItem.selected, .time.selected {
+  background-color: #ffeb3b;
+}
+
 
 @media (max-width: 768px) {
     .tickets {

@@ -1,6 +1,4 @@
 import axios from 'axios';
-const API_URL = "http://localhost:8081/";
-
 
   export const getById = async bookingId => {
     const { data } = await axios.get('/api/bookings/'+bookingId);
@@ -10,7 +8,7 @@ const API_URL = "http://localhost:8081/";
 
 export const addBooking = (movieName,selectedDate,selectedTime,selectedSeats,totalAmount) => {
     return axios
-      .post(API_URL + "/addbooking", {
+      .post(process.env.API_URL + "/addbooking", {
         movieName,selectedDate,selectedTime,selectedSeats,totalAmount
       })
       .then((response) => {
