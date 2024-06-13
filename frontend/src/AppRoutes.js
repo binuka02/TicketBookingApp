@@ -22,12 +22,16 @@ export default function AppRoutes() {
             <Route 
               path="/theater" 
               element={
-                <AuthRoute>
                   <Theater/>
-              </AuthRoute>
               } />
 
             <Route 
+              path="/summary" 
+              element={
+                  <Summary />
+            } />
+
+<Route 
               path="/summary" 
               element={
                 <AuthRoute>

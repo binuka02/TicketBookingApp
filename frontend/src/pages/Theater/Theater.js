@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import classes from './theater.module.css';
 import TheaterBack from '../../assets/img/theaterback.png';
+import { useBooking } from '../../hooks/useBooking';
+import { getById } from '../../services/BookingService';
 
 const Theater = () => {
   const [ticketCount, setTicketCount] = useState(0);
@@ -9,13 +11,12 @@ const Theater = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
-  const navigate = useNavigate();
   const location = useLocation();
   const movieName = location.state?.movieName || 'Movie Name';
 
   const handleSeatChange = (event) => {
     const isChecked = event.target.checked;
-    const pricePerTicket = 10;
+    const pricePerTicket = 80;
     const seat = event.target.id;
 
     if (isChecked) {
@@ -32,7 +33,7 @@ const Theater = () => {
   const generateSeats = () => {
     const rows = 17;
     const cols = 18;
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split(''); 
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
     const seatsToRemove = ['A1', 'A18', 'B1', 'B18'];
     let seats = [];
 
@@ -71,21 +72,42 @@ const Theater = () => {
     setSelectedTime(event.target.value);
   };
 
-  const handleBook = () => {
-    if (!selectedDate || !selectedTime) {
-      alert('Please select a date and time');
+  const handleBook = async () => {
+    if (!selectedDate || !selectedTime || selectedSeats.length === 0) {
+      alert('Please select date, time, and at least one seat.');
       return;
     }
 
-    navigate('/summary', {
-      state: {
-        selectedSeats,
-        totalAmount,
+    try {
+      await addBook({
         movieName,
         selectedDate,
-        selectedTime
-      }
-    });
+        selectedTime,
+        selectedSeats,
+        totalAmount,
+      });
+    } catch (error) {
+      console.error('Booking failed', error);
+    }
+  };
+
+  const { addBooking } = useBooking();
+  const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const returnUrl = params.get('returnUrl');
+
+  useEffect(() => {
+    if (addBooking !== undefined) {
+      // returnUrl ? navigate(returnUrl) : navigate('/summary');
+    }
+  }, [addBooking, navigate, returnUrl]);
+
+  const addBook = async ({ movieName, selectedDate, selectedTime, selectedSeats, totalAmount }) => {
+    if (addBooking) {
+      await addBooking(movieName, selectedDate, selectedTime, selectedSeats, totalAmount);
+    } else {
+      console.error('addBooking is not a function');
+    }
   };
 
   return (
@@ -140,7 +162,7 @@ const Theater = () => {
             </span>
             <div className={classes.amount}>{totalAmount} RON</div>
           </div>
-          <button type="button" onClick={handleBook} className={classes.booktheater}>Book</button>
+          <button type="button" onClick={handleBook} className={classes.booktheater}>Check out</button>
         </div>
       </div>
     </div>

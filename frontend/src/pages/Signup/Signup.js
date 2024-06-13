@@ -23,7 +23,7 @@ const Signup = () => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [cnp, setCNP] = useState(""); // CNP state added
+    const [cnp, setCNP] = useState(""); 
 
     const [errors, setErrors] = useState({
         firstNameError: false,
@@ -32,7 +32,7 @@ const Signup = () => {
         phoneError: false,
         passwordError: false,
         confirmPasswordError: false,
-        cnpError: false // Error state for CNP
+        cnpError: false 
     });
 
     const [formValid, setFormValid] = useState();
