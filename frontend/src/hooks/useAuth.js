@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       setUser(user);
       toast.success('Login Successful');
     } catch (err) {
-      toast.error(err.response.data);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
       setUser(user);
       toast.success('Signup Successful');
     } catch (err) {
-      toast.error(err.response.data);
+      toast.error(err.response.data.message);
     }
   };
 
