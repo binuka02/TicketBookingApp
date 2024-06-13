@@ -17,12 +17,22 @@ export default function AppRoutes() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/underconstruction" element={<UnderConstruction />} />
-            <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+            
+            
+            <Route 
+            path="/success" 
+            element={
+              <AuthRoute>
+                  <PaymentSuccess />
+              </AuthRoute>
+            } />
 
             <Route 
               path="/theater" 
               element={
+                <AuthRoute>
                   <Theater/>
+                  </AuthRoute>
               } />
 
             <Route 
