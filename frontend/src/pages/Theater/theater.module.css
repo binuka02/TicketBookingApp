@@ -318,6 +318,31 @@ input {
   background-color: #ffeb3b;
 }
 
+.ticketCountContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ticketCountLabel {
+  margin-bottom: 8px;
+}
+
+.ticketCountInput input {
+  width: 70px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+/* Adjust as needed for responsive design */
+@media (max-width: 600px) {
+  .ticketCountInput input {
+    width: 50px;
+    font-size: 12px;
+  }
+}
+
+
 
 @media (max-width: 768px) {
     .tickets {

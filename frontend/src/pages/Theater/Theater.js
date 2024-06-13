@@ -3,12 +3,11 @@ import {
   useNavigate,
   useLocation,
   useSearchParams,
-  redirect,
 } from "react-router-dom";
 import classes from "./theater.module.css";
 import TheaterBack from "../../assets/img/theaterback.png";
 import { useBooking } from "../../hooks/useBooking";
-import { getById } from "../../services/BookingService";
+import { TextField } from "@mui/material";
 
 const Theater = () => {
   const [ticketCount, setTicketCount] = useState(() => {
@@ -51,6 +50,11 @@ const Theater = () => {
     localStorage.setItem("selectedTime", selectedTime);
   }, [selectedTime]);
 
+  useEffect(() => {
+    const pricePerTicket = 80;
+    setTotalAmount(ticketCount * pricePerTicket);
+  }, [ticketCount]);
+
   const handleSeatChange = (event) => {
     const isChecked = event.target.checked;
     const pricePerTicket = 80;
@@ -61,8 +65,8 @@ const Theater = () => {
       setTotalAmount((prevAmount) => prevAmount + pricePerTicket);
       setSelectedSeats((prevSeats) => [...prevSeats, seat]);
     } else {
-      setTicketCount((prevCount) => prevCount - 1);
-      setTotalAmount((prevAmount) => prevAmount - pricePerTicket);
+      setTicketCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
+      setTotalAmount((prevAmount) => (prevAmount > 0 ? prevAmount - pricePerTicket : 0));
       setSelectedSeats((prevSeats) => prevSeats.filter((s) => s !== seat));
     }
   };
@@ -91,6 +95,7 @@ const Theater = () => {
                 id={seatNumber}
                 onChange={handleSeatChange}
                 checked={selectedSeats.includes(seatNumber)}
+                disabled
               />
               <label htmlFor={seatNumber} className={classes.seat}>
                 <span className={classes.seatNumber}>{seatNumber}</span>
@@ -126,20 +131,23 @@ const Theater = () => {
   };
 
   const handleBook = async (e) => {
-    console.log(e);
     e.preventDefault();
-    if (!selectedDate || !selectedTime || selectedSeats.length === 0) {
-      alert("Please select date, time, and at least one seat.");
+    if (!selectedDate || !selectedTime || ticketCount === 0) {
+      alert("Please select date, time, and enter ticket count.");
       return;
     }
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user?.id;
 
     try {
       await addBook({
         movieName,
         selectedDate,
         selectedTime,
-        selectedSeats,
+        ticketCount,
         totalAmount,
+        userId,
       });
     } catch (error) {
       console.error("Booking failed", error);
@@ -151,30 +159,22 @@ const Theater = () => {
   const [params] = useSearchParams();
   const returnUrl = params.get("returnUrl");
 
-  // useEffect(() => {
-  //   if (addBooking !== undefined) {
-  //     // returnUrl ? navigate(returnUrl) : navigate('/summary');
-  //   }
-  // }, [addBooking, navigate, returnUrl]);
-
   const addBook = async ({
     movieName,
     selectedDate,
     selectedTime,
-    selectedSeats,
+    ticketCount,
     totalAmount,
+    userId,
   }) => {
-    console.log("Test 1");
     const stripeUrl = await addBooking(
       movieName,
       selectedDate,
       selectedTime,
-      selectedSeats,
-      totalAmount
+      ticketCount,
+      totalAmount,
+      userId
     );
-    console.log("Test 5");
-    console.log(stripeUrl);
-    // redirect(stripeUrl);
     window.location.href = stripeUrl;
   };
 
@@ -253,6 +253,25 @@ const Theater = () => {
                 ))}
               </div>
             )}
+            {selectedTime && (
+              <div className={classes.ticketCountContainer}>
+                <label htmlFor="ticketCount" className={classes.ticketCountLabel}>
+                  Ticket Count:
+                </label>
+                <TextField
+                  type="number"
+                  id="ticketCount"
+                  name="ticketCount"
+                  min="1"
+                  max="20"
+                  value={ticketCount}
+                  onChange={(e) => setTicketCount(Math.max(0, Number(e.target.value)))}
+                  className={classes.ticketCountInput}
+                  inputProps={{ className: classes.ticketCountInput }}
+                  style={{ width: "70px" }} // Smaller input width
+                />
+              </div>
+            )}
           </div>
         </div>
         <div className={classes.price}>
@@ -265,7 +284,7 @@ const Theater = () => {
           <button
             type="button"
             onClick={handleBook}
-            className={classes.booktheater}
+            disabled={!selectedDate || !selectedTime || ticketCount === 0}
           >
             Check out
           </button>

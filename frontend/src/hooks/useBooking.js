@@ -11,16 +11,18 @@ export default function BookingProvider({ children }) {
     movieName,
     selectedDate,
     selectedTime,
-    selectedSeats,
-    totalAmount
+    ticketCount,
+    totalAmount,
+    userId
   ) => {
     try {
       const booking = await BookingService.addBooking(
         movieName,
         selectedDate,
         selectedTime,
-        selectedSeats,
-        totalAmount
+        ticketCount,
+        totalAmount,
+        userId
       );
       setBooking(booking);
       toast.success("Booking Confirmed & Make the Payment!");
@@ -29,6 +31,7 @@ export default function BookingProvider({ children }) {
       toast.error(err.response.data);
     }
   };
+  
 
   return (
     <BookingContext.Provider value={{ booking, addBooking }}>
