@@ -20,7 +20,7 @@ const Signup = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
+    const [contact, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [cnp, setCNP] = useState(""); 
@@ -85,7 +85,7 @@ const Signup = () => {
         e.preventDefault();
         setSuccess(null);
 
-        if (!firstName || !lastName || !email || !phone || !password || !confirmPassword || !cnp) {
+        if (!firstName || !lastName || !email || !contact || !password || !confirmPassword || !cnp) {
             setFormValid("All fields are required.");
             return;
         }
@@ -102,7 +102,7 @@ const Signup = () => {
                 firstName,
                 lastName,
                 email,
-                phone,
+                contact,
                 password,
                 confirmPassword,
                 cnp
@@ -123,8 +123,8 @@ const Signup = () => {
         returnUrl ? navigate(returnUrl) : navigate('/');
     }, [user]);
 
-    const submit = async ({ firstName, lastName, email, phone, cnp, password, confirmPassword }) => {
-        await auth.signup(firstName, lastName, email, phone, cnp, password, confirmPassword);
+    const submit = async ({ firstName, lastName, email, contact, cnp, password}) => {
+        await auth.signup(firstName, lastName, email, contact, cnp, password);
     };
 
     return (
@@ -179,7 +179,7 @@ const Signup = () => {
                             fullWidth
                             id="phone"
                             variant="standard"
-                            value={phone}
+                            value={contact}
                             onChange={handleChange(setPhone)}
                             size="small"
                         /><br />

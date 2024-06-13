@@ -54,8 +54,8 @@ import axios from 'axios';
 
 const API_URL = "http://localhost:5000/api/auth";
 
-export const signup = async (firstName, lastName, email, phone, cnp, password, confirmPassword) => {
-  const response = await axios.post(`${API_URL}/signup`, { firstName, lastName, email, phone, cnp, password, confirmPassword });
+export const signup = async (firstName, lastName, email, contact, cnp, password) => {
+  const response = await axios.post(`${API_URL}/signup`, { firstName, lastName, email, contact, cnp, password});
   localStorage.setItem('user', JSON.stringify(response.data.user));
   return response.data.user;
 };
