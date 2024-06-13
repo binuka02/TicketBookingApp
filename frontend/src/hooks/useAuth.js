@@ -1,5 +1,3 @@
-// contexts/AuthContext.js
-
 import { useState, createContext, useContext } from 'react';
 import * as AuthService from "../services/AuthService";
 import { toast } from 'react-toastify';

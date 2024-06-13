@@ -75,23 +75,24 @@ export const signup = async (firstName, lastName, email, contact, cnp, password)
   }
 };
 
-
 export const login = async (email, password) => {
   try {
-    const response = await axios.post('/login', { email, password });
-    const { token } = response.data;
-    localStorage.setItem('access_token', token);
-    return response.data.user; // Assuming you return the user object from your backend
+    const response = await axiosInstance.post('/login', { email, password });
+    const { token, user } = response.data; // Ensure user object is returned from the backend
+    localStorage.setItem(TOKEN_KEY, token);
+    localStorage.setItem('user', JSON.stringify(user)); // Store user object
+    return user;
   } catch (err) {
     throw err; // Handle error appropriately in your Login component
   }
 };
 
 export const logout = () => {
+  localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem('user');
 };
 
 export const getCurrentUser = () =>
-  localStorage.getItem('access_token')
-    ? JSON.parse(localStorage.getItem('access_token'))
+  localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user'))
     : null;
