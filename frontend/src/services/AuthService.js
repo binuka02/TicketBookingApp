@@ -91,17 +91,7 @@ export const logout = () => {
   localStorage.removeItem('user');
 };
 
-export const getCurrentUser = () => {
-  const userString = localStorage.getItem('user');
-  if (!userString) {
-    return null; // or handle this case based on your application logic
-  }
-  
-  try {
-    const user = JSON.parse(userString);
-    return user;
-  } catch (error) {
-    console.error('Error parsing user from local storage:', error);
-    return null; // or handle this case based on your application logic
-  }
-};
+export const getCurrentUser = () =>
+  localStorage.getItem('access_token')
+    ? JSON.parse(localStorage.getItem('access_token'))
+    : null;

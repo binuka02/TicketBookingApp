@@ -52,20 +52,22 @@ function Navbar() {
                 <Link to="/underconstruction" onClick={handleLinkClick}>Movies</Link>
                 <Link to="/underconstruction" onClick={handleLinkClick}>Contact Us</Link>
 
-                {user ? (
-                    <div className={classes.dropdown}>
-                        <button onClick={toggleDropdown} className={classes.userBtn}>
-                            {user.firstName}
-                        </button>
-                        {isDropdownOpen && (
-                            <div className={classes.dropdownContent}>
-                                <button onClick={logout}>Logout</button>
-                            </div>
-                        )}
-                    </div>
-                ) : (
-                    <Link to="/login" onClick={handleLinkClick}>Sign In</Link>
-                )}
+				{user ? (
+                <div className={classes.dropdown}>
+                    <button onClick={toggleDropdown} className={classes.userBtn}>
+                        {user.firstName}
+                    </button>
+                    {isDropdownOpen && (
+                        <div className={classes.dropdownContent}>
+                            <button onClick={logout}>Logout</button>
+                        </div>
+                    )}
+                </div>
+            ) : (
+                <Link to="/login" className={classes.signInBtn}>
+                    Sign In
+                </Link>
+            )}
 
                 {isResponsive && (
                     <button className={classes.navCloseBtn} onClick={showNavbar}>
