@@ -49,19 +49,27 @@
 
 
 
+// services/AuthService.js
+
+// services/AuthService.js
 
 import axios from 'axios';
 
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "http://localhost:8081/api/v1/auth";
+
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+  withCredentials: true, 
+});
 
 export const signup = async (firstName, lastName, email, contact, cnp, password) => {
-  const response = await axios.post(`${API_URL}/signup`, { firstName, lastName, email, contact, cnp, password});
+  const response = await axiosInstance.post('/signup', { firstName, lastName, email, contact, cnp, password});
   localStorage.setItem('user', JSON.stringify(response.data.user));
   return response.data.user;
 };
 
 export const login = async (email, password) => {
-  const response = await axios.post(`${API_URL}/login`, { email, password });
+  const response = await axiosInstance.post('/login', { email, password });
   localStorage.setItem('user', JSON.stringify(response.data.user));
   return response.data.user;
 };
@@ -71,5 +79,9 @@ export const logout = () => {
 };
 
 export const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem('user'));
+  const user = localStorage.getItem('user');
+  if (user) {
+    return JSON.parse(user);
+  }
+  return null; // Or whatever default value you want to return
 };

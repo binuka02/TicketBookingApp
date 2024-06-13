@@ -1,3 +1,5 @@
+// contexts/AuthContext.js
+
 import { useState, createContext, useContext } from 'react';
 import * as AuthService from "../services/AuthService";
 import { toast } from 'react-toastify';
@@ -5,7 +7,7 @@ import { toast } from 'react-toastify';
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(AuthService.getCurrentUser() || null);
+  const [user, setUser] = useState(AuthService.getCurrentUser() || null);
 
   const login = async (email, password) => {
     try {
