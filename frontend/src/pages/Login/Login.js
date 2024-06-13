@@ -44,10 +44,11 @@ const Login = () => {
   const returnUrl = params.get('returnUrl');
   
   useEffect(() => {
-    if (!user) return;
-
-    returnUrl ? navigate(returnUrl) : navigate('/');
+    if (user) {
+      returnUrl ? navigate(returnUrl) : navigate('/');
+    }
   }, [user, navigate, returnUrl]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

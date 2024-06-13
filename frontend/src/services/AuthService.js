@@ -64,9 +64,15 @@ const axiosInstance = axios.create({
 });
 
 export const signup = async (firstName, lastName, email, contact, cnp, password) => {
-  const response = await axiosInstance.post('/signup', { firstName, lastName, email, contact, cnp, password});
-  localStorage.setItem('user', JSON.stringify(response.data.user));
-  return response.data.user;
+  try {
+    const response = await axiosInstance.post('/signup', { firstName, lastName, email, contact, cnp, password });
+    const { token, user } = response.data;
+    localStorage.setItem(TOKEN_KEY, token);
+    localStorage.setItem('user', JSON.stringify(user));
+    return user;
+  } catch (err) {
+    throw err; // Handle error appropriately in your Signup component
+  }
 };
 
 
