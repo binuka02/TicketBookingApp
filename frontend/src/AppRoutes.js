@@ -8,6 +8,7 @@ import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import AuthRoute from './services/AuthRoutes';
 import UnderConstruction from './pages/UnderConstruction/UnderConstruction';
+import PaymentSuccess from './pages/PaymentSuccess/PaymentSuccess';
 
 export default function AppRoutes() {
     return (
@@ -16,7 +17,8 @@ export default function AppRoutes() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/underconstruction" element={<UnderConstruction />} />
-            
+            <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+
             <Route 
               path="/theater" 
               element={
