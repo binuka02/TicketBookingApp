@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
@@ -100,6 +100,11 @@ const Signup = () => {
     const navigate = useNavigate();
     const [params] = useSearchParams();
     const returnUrl = params.get('returnUrl');
+  
+    useEffect(() => {
+      if (!user) return;
+      returnUrl ? navigate(returnUrl) : navigate('/');
+    }, [user]);
 
 
     const submit = async data => {
