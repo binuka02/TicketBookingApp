@@ -1,6 +1,5 @@
 // import axios from "axios";
 
-
 // export const signup = (firstName, lastName, email, phone, cnp, password, confirmPassword) => {
 //     return axios
 //       .post(process.env.API_URL + "/signup", {
@@ -10,7 +9,7 @@
 //         if (response.data.accessToken) {
 //           localStorage.setItem("user", JSON.stringify(response.data));
 //         }
-  
+
 //         return response.data;
 //       });
 //   };
@@ -25,7 +24,7 @@
 //         if (response.data.accessToken) {
 //           localStorage.setItem("user", JSON.stringify(response.data));
 //         }
-  
+
 //         return response.data;
 //       });
 //   };
@@ -33,42 +32,54 @@
 //   export const logout = () => {
 //     localStorage.removeItem("user");
 //   };
-  
+
 //   export const getCurrentUser = () => {
 //     return JSON.parse(localStorage.getItem("user"));
 //   };
-  
+
 // // const authService = {
 // //     signup,
 // //     login,
 // //     logout,
 // //     getCurrentUser,
 // //   };
-  
+
 // //   export default authService;
 
-
-
 // services/AuthService.js
 
 // services/AuthService.js
 
-import axios from '../Interceptors/axiosInstance';
+import axios from "../Interceptors/axiosInstance";
 
 const API_URL = "http://localhost:8081/api/v1/auth";
-const TOKEN_KEY = 'access_token';
+const TOKEN_KEY = "access_token";
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
-  withCredentials: true, 
+  withCredentials: true,
 });
 
-export const signup = async (firstName, lastName, email, contact, cnp, password) => {
+export const signup = async (
+  firstName,
+  lastName,
+  email,
+  contact,
+  cnp,
+  password
+) => {
   try {
-    const response = await axiosInstance.post('/signup', { firstName, lastName, email, contact, cnp, password });
+    const response = await axiosInstance.post("/signup", {
+      firstName,
+      lastName,
+      email,
+      contact,
+      cnp,
+      password,
+    });
     const { token, user } = response.data;
     localStorage.setItem(TOKEN_KEY, token);
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
     return user;
   } catch (err) {
     throw err; // Handle error appropriately in your Signup component
@@ -77,10 +88,10 @@ export const signup = async (firstName, lastName, email, contact, cnp, password)
 
 export const login = async (email, password) => {
   try {
-    const response = await axiosInstance.post('/login', { email, password });
+    const response = await axiosInstance.post("/login", { email, password });
     const { token, user } = response.data; // Ensure user object is returned from the backend
     localStorage.setItem(TOKEN_KEY, token);
-    localStorage.setItem('user', JSON.stringify(user)); // Store user object
+    localStorage.setItem("user", JSON.stringify(user)); // Store user object
     return user;
   } catch (err) {
     throw err; // Handle error appropriately in your Login component
@@ -89,10 +100,10 @@ export const login = async (email, password) => {
 
 export const logout = () => {
   localStorage.removeItem(TOKEN_KEY);
-  localStorage.removeItem('user');
+  localStorage.removeItem("user");
 };
 
 export const getCurrentUser = () =>
-  localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user'))
+  localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
     : null;
