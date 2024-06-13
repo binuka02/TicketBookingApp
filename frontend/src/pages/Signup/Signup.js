@@ -13,21 +13,17 @@ import { toast } from 'react-toastify';
 import AuthService from "../../services/AuthService";
 import { useAuth } from "../../hooks/useAuth";
 
-
 const isEmail = (email) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+const isCNP = (cnp) => /^[0-9]{13}$/.test(cnp);
 
 const Signup = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-    const [data, setData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        password: "",
-        confirmPassword: ""
-    });
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [cnp, setCNP] = useState(""); // CNP state added
 
     const [errors, setErrors] = useState({
         firstNameError: false,
@@ -35,14 +31,17 @@ const Signup = () => {
         emailError: false,
         phoneError: false,
         passwordError: false,
-        confirmPasswordError: false
+        confirmPasswordError: false,
+        cnpError: false // Error state for CNP
     });
 
     const [formValid, setFormValid] = useState();
     const [success, setSuccess] = useState();
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    const handleChange = ({ target: { name, value } }) => {
-        setData({ ...data, [name]: value });
+    const handleChange = (setter) => (event) => {
+        setter(event.target.value);
     };
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -51,39 +50,47 @@ const Signup = () => {
     const handleMouseDownConfirmPassword = (event) => event.preventDefault();
 
     const handleEmailValidation = () => {
-        if (!isEmail(data.email)) {
+        if (!isEmail(email)) {
             setErrors({ ...errors, emailError: true });
-            return;
+        } else {
+            setErrors({ ...errors, emailError: false });
         }
-        setErrors({ ...errors, emailError: false });
     };
 
     const handlePasswordValidation = () => {
-        if (data.password.length < 5 || data.password.length > 20) {
+        if (password.length < 5 || password.length > 20) {
             setErrors({ ...errors, passwordError: true });
-            return;
+        } else {
+            setErrors({ ...errors, passwordError: false });
         }
-        setErrors({ ...errors, passwordError: false });
     };
 
     const handleConfirmPasswordValidation = () => {
-        if (data.password !== data.confirmPassword) {
+        if (password !== confirmPassword) {
             setErrors({ ...errors, confirmPasswordError: true });
-            return;
+        } else {
+            setErrors({ ...errors, confirmPasswordError: false });
         }
-        setErrors({ ...errors, confirmPasswordError: false });
+    };
+
+    const handleCNPValidation = () => {
+        if (!isCNP(cnp)) {
+            setErrors({ ...errors, cnpError: true });
+        } else {
+            setErrors({ ...errors, cnpError: false });
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSuccess(null);
 
-        if (!data.firstName || !data.lastName || !data.email || !data.phone || !data.password || !data.confirmPassword) {
+        if (!firstName || !lastName || !email || !phone || !password || !confirmPassword || !cnp) {
             setFormValid("All fields are required.");
             return;
         }
 
-        if (errors.emailError || errors.passwordError || errors.confirmPasswordError) {
+        if (errors.emailError || errors.passwordError || errors.confirmPasswordError || errors.cnpError) {
             setFormValid("Please correct the errors before submitting.");
             return;
         }
@@ -91,10 +98,17 @@ const Signup = () => {
         setFormValid(null);
 
         try {
-            await submit(data);
-            toast.success("Signup successful!");
+            await submit({
+                firstName,
+                lastName,
+                email,
+                phone,
+                password,
+                confirmPassword,
+                cnp
+            });
         } catch (error) {
-            toast.error("Signup failed. Please try again.");
+            // Handle submission error
         }
     };
 
@@ -103,14 +117,14 @@ const Signup = () => {
     const navigate = useNavigate();
     const [params] = useSearchParams();
     const returnUrl = params.get('returnUrl');
-  
+
     useEffect(() => {
-      if (!user) return;
-      returnUrl ? navigate(returnUrl) : navigate('/');
+        if (!user) return;
+        returnUrl ? navigate(returnUrl) : navigate('/');
     }, [user]);
 
-    const submit = async (data) => {
-        await auth.signup(data);
+    const submit = async ({ firstName, lastName, email, phone, cnp, password, confirmPassword }) => {
+        await auth.signup(firstName, lastName, email, phone, cnp, password, confirmPassword);
     };
 
     return (
@@ -133,9 +147,8 @@ const Signup = () => {
                             fullWidth
                             id="firstName"
                             variant="standard"
-                            value={data.firstName}
-                            name="firstName"
-                            onChange={handleChange}
+                            value={firstName}
+                            onChange={handleChange(setFirstName)}
                             size="small"
                         /><br />
                         <TextField
@@ -144,9 +157,8 @@ const Signup = () => {
                             fullWidth
                             id="lastName"
                             variant="standard"
-                            value={data.lastName}
-                            name="lastName"
-                            onChange={handleChange}
+                            value={lastName}
+                            onChange={handleChange(setLastName)}
                             size="small"
                         /><br />
                         <TextField
@@ -156,10 +168,9 @@ const Signup = () => {
                             error={errors.emailError}
                             id="email"
                             variant="standard"
-                            value={data.email}
-                            name="email"
+                            value={email}
                             onBlur={handleEmailValidation}
-                            onChange={handleChange}
+                            onChange={handleChange(setEmail)}
                             size="small"
                         /><br />
                         <TextField
@@ -168,9 +179,20 @@ const Signup = () => {
                             fullWidth
                             id="phone"
                             variant="standard"
-                            value={data.phone}
-                            name="phone"
-                            onChange={handleChange}
+                            value={phone}
+                            onChange={handleChange(setPhone)}
+                            size="small"
+                        /><br />
+                        <TextField
+                            className={classes.input}
+                            placeholder="CNP"
+                            fullWidth
+                            error={errors.cnpError}
+                            id="cnp"
+                            variant="standard"
+                            value={cnp}
+                            onBlur={handleCNPValidation}
+                            onChange={handleChange(setCNP)}
                             size="small"
                         /><br />
                         <Input
@@ -180,9 +202,8 @@ const Signup = () => {
                             id="password"
                             type={showPassword ? "text" : "password"}
                             placeholder="Password"
-                            name="password"
-                            onChange={handleChange}
-                            value={data.password}
+                            onChange={handleChange(setPassword)}
+                            value={password}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -202,9 +223,8 @@ const Signup = () => {
                             id="confirmPassword"
                             type={showConfirmPassword ? "text" : "password"}
                             placeholder="Confirm Password"
-                            name="confirmPassword"
-                            onChange={handleChange}
-                            value={data.confirmPassword}
+                            onChange={handleChange(setConfirmPassword)}
+                            value={confirmPassword}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton

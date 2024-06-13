@@ -70,9 +70,7 @@ const Login = () => {
 
     try {
       await login(emailInput, passwordInput);
-      toast.success("Login successful!");
     } catch (error) {
-      toast.error("Login failed. Please check your credentials.");
     }
   };
 

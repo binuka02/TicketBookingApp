@@ -17,9 +17,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signup = async data => {
+  const signup = async (firstName, lastName, email, phone, cnp, password, confirmPassword) => {
     try {
-      const user = await AuthService.signup(data);
+      const user = await AuthService.signup(firstName, lastName, email, phone, cnp, password, confirmPassword);
       setUser(user);
       toast.success('Signup Successful');
     } catch (err) {

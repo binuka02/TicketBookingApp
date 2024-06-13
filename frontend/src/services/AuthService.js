@@ -2,10 +2,10 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8081/api/v1/auth";
 
-export const signup = (data) => {
+export const signup = (firstName, lastName, email, phone, cnp, password, confirmPassword) => {
     return axios
       .post(API_URL + "/signup", {
-        data,
+        firstName, lastName, email, phone, cnp, password, confirmPassword
       })
       .then((response) => {
         if (response.data.accessToken) {
