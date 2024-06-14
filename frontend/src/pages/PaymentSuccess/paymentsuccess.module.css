@@ -1,4 +1,4 @@
-.payment-success {
+.payment_success {
     margin: 20px;
     padding: 20px;
     background-color: #f8f9fa;
@@ -8,30 +8,30 @@
     max-width: 100%;
   }
   
-  .booking-details {
+  .booking_details {
     margin-top: 20px;
   }
   
-  .bookings-table {
+  .bookings_table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
   }
   
-  .bookings-table th,
-  .bookings-table td {
+  .bookings_table th,
+  .bookings_table td {
     padding: 10px;
     text-align: left;
     border: 1px solid #ced4da;
   }
   
-  .bookings-table th {
+  .bookings_table th {
     background-color: #f0f0f0;
   }
   
   @media (max-width: 768px) {
-    .bookings-table th,
-    .bookings-table td {
+    .bookings_table th,
+    .bookings_table td {
       font-size: 14px;
     }
   }

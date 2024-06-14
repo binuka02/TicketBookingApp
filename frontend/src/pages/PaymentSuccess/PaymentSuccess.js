@@ -82,9 +82,6 @@ const PaymentSuccess = () => {
               <th>Date</th>
               <th>Time</th>
               <th>Seat Count</th>
-              <th>Event Type</th>
-              <th>Status</th>
-              <th>User ID</th>
               <th>Seat Number</th>
             </tr>
           </thead>
